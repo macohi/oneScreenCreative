@@ -67,7 +67,7 @@ class InventoryScreen extends FlxSubState
 				block.scale.set(Block.SCALE, Block.SCALE);
 		}
 
-		if (FlxG.keys.justPressed.E && blackBG.alpha == 1)
+		if (FlxG.keys.justPressed.E && blackBG.alpha > 0)
 		{
 			for (block in inventoryBlocks.members)
 				FlxTween.tween(block, {alpha: 0, x: FlxG.camera.x - (block.width * 4)}, 0.5, {
