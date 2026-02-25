@@ -18,7 +18,7 @@ class InventoryScreen extends FlxSubState
 		add(whiteBG);
 		whiteBG.screenCenter();
 
-		FlxTween.tween(whiteBG, {alpha: .5}, 0.3, {ease: FlxEase.quadInOut});
+		FlxTween.tween(whiteBG, {alpha: .5}, 0.15, {ease: FlxEase.quadInOut});
 	}
 
 	override function update(elapsed:Float)
@@ -27,7 +27,7 @@ class InventoryScreen extends FlxSubState
 
 		if (FlxG.keys.justPressed.E)
 		{
-			FlxTween.tween(whiteBG, {alpha: 0}, 0.3, {
+			FlxTween.tween(whiteBG, {alpha: 0}, 0.15, {
 				ease: FlxEase.quadInOut,
 				onComplete: tween ->
 				{
