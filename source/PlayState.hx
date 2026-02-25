@@ -27,6 +27,7 @@ class PlayState extends FlxState
 		player.makeGraphic(Block.BLOCK_SIZE, Block.BLOCK_SIZE);
 		player.scale.set(Block.SCALE, Block.SCALE);
 		player.updateHitbox();
+		player.alpha = .5;
 
 		generateWorld();
 	}
@@ -34,6 +35,29 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		if (FlxG.keys.anyJustPressed([A, S, W, D, LEFT, DOWN, UP, RIGHT]))
+		{
+			if (FlxG.keys.anyJustPressed([A, LEFT]))
+				player.x -= player.width;
+			if (FlxG.keys.anyJustPressed([D, RIGHT]))
+				player.x += player.width;
+
+			if (FlxG.keys.anyJustPressed([W, UP]))
+				player.y -= player.height;
+			if (FlxG.keys.anyJustPressed([S, DOWN]))
+				player.y += player.height;
+
+			if (player.x < 0)
+				player.x = 0;
+			if (player.x > FlxG.width - player.width)
+				player.x = FlxG.width - player.width;
+
+			if (player.y < 0)
+				player.y = 0;
+			if (player.y > FlxG.height - player.height)
+				player.y = FlxG.height - player.height;
+		}
 	}
 
 	public function generateWorld()
