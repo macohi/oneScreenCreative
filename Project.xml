@@ -12,7 +12,7 @@
 
 	<!-- _________________________________ Custom _______________________________ -->
 
-	<!--Place custom nodes like icons here-->
+	<haxeflag name="--dce full" unless="debug"/>
 
 	<!-- ____________________________ Window Settings ___________________________ -->
 
@@ -24,6 +24,7 @@
 	<!-- _____________________________ Path Settings ____________________________ -->
 
 	<set name="BUILD_DIR" value="export/release" />
+	<set name="BUILD_DIR" value="export/indev" if="indev"/>
 	<set name="BUILD_DIR" value="export/debug" if="debug"/>
 
 	<source path="source" />
