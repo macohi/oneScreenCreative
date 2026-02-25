@@ -58,6 +58,23 @@ class PlayState extends FlxState
 			if (player.y > (height * (Block.BLOCK_SIZE * Block.SCALE)) - player.height)
 				player.y = (height * (Block.BLOCK_SIZE * Block.SCALE)) - player.height;
 		}
+
+		if (FlxG.keys.justPressed.ENTER)
+		{
+			var overlappingBlock:Bool = false;
+
+			for (block in blocks.members)
+				if (player.overlaps(block))
+				{
+					overlappingBlock = true;
+
+					blocks.members.remove(block);
+					block.destroy();
+				} else if (overlappingBlock) continue;
+
+			if (!overlappingBlock)
+				blocks.add(new Block(1, player.x, player.y));
+		}
 	}
 
 	public function generateWorld()
