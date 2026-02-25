@@ -27,7 +27,11 @@ class PlayState extends FlxState
 			{
 				if (h >= 15)
 				{
-					var newblock = new Block((h == 15) ? 0 : 1, w * 16, h * 16);
+					var newblock = new Block(
+						(h == 15) ? 0 : 1,
+						w * (Block.BLOCK_SIZE * Block.SCALE),
+						h * (Block.BLOCK_SIZE * Block.SCALE)
+					);
 					blocks.add(newblock);
 				}
 
