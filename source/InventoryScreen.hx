@@ -1,3 +1,4 @@
+import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.tweens.FlxEase;
@@ -52,6 +53,11 @@ class InventoryScreen extends FlxSubState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		if (FlxG.keys.anyJustPressed([A, LEFT]))
+			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, -1, blockCount, 0);
+		if (FlxG.keys.anyJustPressed([D, RIGHT]))
+			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, 1, blockCount, 0);
 
 		for (block in inventoryBlocks.members)
 		{
