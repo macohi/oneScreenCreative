@@ -1,12 +1,13 @@
 package;
 
+import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
 import flixel.FlxState;
 
 class PlayState extends FlxState
 {
-	var width:Int = 40;
-	var height:Int = 30;
+	var width:Int = Math.floor(FlxG.width / (Block.BLOCK_SIZE * Block.SCALE));
+	var height:Int = Math.floor(FlxG.height / (Block.BLOCK_SIZE * Block.SCALE)) + 1;
 
 	var blocks:FlxTypedSpriteGroup<Block>;
 
@@ -25,10 +26,10 @@ class PlayState extends FlxState
 			w = 0;
 			while (w < width)
 			{
-				if (h >= 15)
+				if (h >= Math.floor(height / 2))
 				{
 					var newblock = new Block(
-						(h == 15) ? 0 : 1,
+						(h == Math.floor(height / 2)) ? 0 : 1,
 						w * (Block.BLOCK_SIZE * Block.SCALE),
 						h * (Block.BLOCK_SIZE * Block.SCALE)
 					);
