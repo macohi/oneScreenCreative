@@ -14,7 +14,7 @@ class InventoryScreen extends FlxSubState
 	var blockCount:Int = 2;
 
 	var whiteBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height);
-	
+
 	var inventoryBlocks:FlxTypedSpriteGroup<Block>;
 
 	override function create()
@@ -25,7 +25,7 @@ class InventoryScreen extends FlxSubState
 		add(whiteBG);
 		whiteBG.screenCenter();
 
-		FlxTween.tween(whiteBG, {alpha: .5}, 0.15, {ease: FlxEase.quadInOut});
+		FlxTween.tween(whiteBG, {alpha: .75}, 1, {ease: FlxEase.quadInOut});
 
 		inventoryBlocks = new FlxTypedSpriteGroup<Block>();
 		add(inventoryBlocks);
@@ -35,7 +35,14 @@ class InventoryScreen extends FlxSubState
 		{
 			var block = new Block(b, 0, 0);
 			block.screenCenter();
-			block.x = 32 + (b * (block.width * 2));
+			block.alpha = 0;
+			block.x = FlxG.camera.x - (block.width * 4);
+			block.ID = b;
+
+			FlxTween.tween(block, {alpha: 1, x: 32 + (b * (block.width * 2))}, 0.5, {
+				ease: FlxEase.quadInOut,
+				startDelay: block.ID * 0.1
+			});
 
 			inventoryBlocks.add(block);
 
@@ -50,11 +57,12 @@ class InventoryScreen extends FlxSubState
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
 			for (block in inventoryBlocks.members)
-				FlxTween.tween(block, {alpha: 0, y: -96}, 0.1, {
-					ease: FlxEase.quadInOut
+				FlxTween.tween(block, {alpha: 0, x: FlxG.camera.x - (block.width * 4)}, 0.5, {
+					ease: FlxEase.quadInOut,
+					startDelay: block.ID * 0.1
 				});
 
-			FlxTween.tween(whiteBG, {alpha: 0}, 0.15, {
+			FlxTween.tween(whiteBG, {alpha: 0}, 1, {
 				ease: FlxEase.quadInOut,
 				onComplete: tween ->
 				{
