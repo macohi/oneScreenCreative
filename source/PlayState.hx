@@ -89,6 +89,8 @@ class PlayState extends FlxState
 			}
 
 			h++;
+
+			trace('Generating... (${w}x${h} / ${blocks.members.length} blocks)');
 		}
 
 		trace('Generated world! (${blocks.members.length} blocks)');
