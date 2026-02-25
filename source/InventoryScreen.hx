@@ -9,10 +9,9 @@ import flixel.FlxSubState;
 class InventoryScreen extends FlxSubState
 {
 	public static var CURRENT_ITEM:Int = 0;
+	public static var BLOCK_COUNT:Int = 0;
 
 	var whiteBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height);
-
-	var blockCount:Int = 0;
 
 	override function create()
 	{
@@ -24,7 +23,7 @@ class InventoryScreen extends FlxSubState
 
 		FlxTween.tween(whiteBG, {alpha: .5}, 0.15, {ease: FlxEase.quadInOut});
 
-		if (blockCount > 0)
+		if (BLOCK_COUNT > 0)
 			return;
 
 		var graphics:Array<FlxFrame> = [];
@@ -43,8 +42,8 @@ class InventoryScreen extends FlxSubState
 			i++;
 		}
 
-		blockCount = graphics.length;
-		trace('Got $blockCount blocks!');
+		BLOCK_COUNT = graphics.length;
+		trace('Got $BLOCK_COUNT blocks!');
 	}
 
 	override function update(elapsed:Float)
