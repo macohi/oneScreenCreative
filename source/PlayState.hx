@@ -90,5 +90,7 @@ class PlayState extends FlxState
 
 			h++;
 		}
+
+		trace('Generated world! (${blocks.members.length} blocks)');
 	}
 }
