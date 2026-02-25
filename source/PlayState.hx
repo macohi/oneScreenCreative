@@ -18,6 +18,16 @@ class PlayState extends FlxState
 		blocks = new FlxTypedSpriteGroup<Block>();
 		add(blocks);
 
+		generateWorld();
+	}
+
+	override public function update(elapsed:Float)
+	{
+		super.update(elapsed);
+	}
+
+	public function generateWorld()
+	{
 		var w = 0;
 		var h = 0;
 
@@ -28,11 +38,11 @@ class PlayState extends FlxState
 			{
 				if (h >= Math.floor(height / 2))
 				{
-					var newblock = new Block(
-						(h == Math.floor(height / 2)) ? 0 : 1,
-						w * (Block.BLOCK_SIZE * Block.SCALE),
-						h * (Block.BLOCK_SIZE * Block.SCALE)
-					);
+					var block = (h == Math.floor(height / 2)) ? 0 : 1;
+					var x = w * (Block.BLOCK_SIZE * Block.SCALE);
+					var y = h * (Block.BLOCK_SIZE * Block.SCALE);
+
+					var newblock = new Block(block, x, y);
 					blocks.add(newblock);
 				}
 
@@ -41,10 +51,5 @@ class PlayState extends FlxState
 
 			h++;
 		}
-	}
-
-	override public function update(elapsed:Float)
-	{
-		super.update(elapsed);
 	}
 }
