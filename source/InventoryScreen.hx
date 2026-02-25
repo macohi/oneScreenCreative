@@ -25,6 +25,7 @@ class InventoryScreen extends FlxSubState
 		add(blackBG);
 		blackBG.screenCenter();
 
+		FlxTween.cancelTweensOf(blackBG);
 		FlxTween.tween(blackBG, {alpha: .75}, 1, {ease: FlxEase.quadInOut});
 
 		inventoryBlocks = new FlxTypedSpriteGroup<Block>();
@@ -75,6 +76,7 @@ class InventoryScreen extends FlxSubState
 					startDelay: block.ID * 0.1
 				});
 
+			FlxTween.cancelTweensOf(blackBG);
 			FlxTween.tween(blackBG, {alpha: 0}, 1, {
 				ease: FlxEase.quadInOut,
 				onComplete: tween ->
