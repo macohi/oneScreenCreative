@@ -75,6 +75,9 @@ class PlayState extends FlxState
 			if (!overlappingBlock)
 				blocks.add(new Block(1, player.x, player.y));
 		}
+
+		if (FlxG.keys.justPressed.E)
+			openSubState(new InventoryScreen());
 	}
 
 	public function generateWorld()
