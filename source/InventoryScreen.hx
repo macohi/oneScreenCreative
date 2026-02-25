@@ -10,7 +10,7 @@ import flixel.FlxSubState;
 
 class InventoryScreen extends FlxSubState
 {
-	public static var CURRENT_ITEM:Int = 0;
+	public static var CURRENT_ITEM:Int = 1;
 
 	var blockCount:Int = 2;
 
@@ -54,6 +54,14 @@ class InventoryScreen extends FlxSubState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		for (block in inventoryBlocks.members)
+		{
+			if (CURRENT_ITEM == block.id)
+				block.colorTransform.redMultiplier = block.colorTransform.greenMultiplier = block.colorTransform.blueMultiplier = 1.1;
+			else
+				block.colorTransform.redMultiplier = block.colorTransform.greenMultiplier = block.colorTransform.blueMultiplier = 1.0;
+		}
 
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
