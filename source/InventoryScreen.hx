@@ -55,7 +55,7 @@ class InventoryScreen extends FlxSubState
 
 		for (block in inventoryBlocks.members)
 		{
-			if (CURRENT_ITEM == block.id)
+			if (CURRENT_ITEM == block.blockID)
 				block.colorTransform.redMultiplier = block.colorTransform.greenMultiplier = block.colorTransform.blueMultiplier = 1.1;
 			else
 				block.colorTransform.redMultiplier = block.colorTransform.greenMultiplier = block.colorTransform.blueMultiplier = 1.0;
