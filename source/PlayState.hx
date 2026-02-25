@@ -50,13 +50,13 @@ class PlayState extends FlxState
 
 			if (player.x < 0)
 				player.x = 0;
-			if (player.x > (width * (Block.BLOCK_SIZE * Block.SCALE)))
-				player.x = (width * (Block.BLOCK_SIZE * Block.SCALE));
+			if (player.x > (width * (Block.BLOCK_SIZE * Block.SCALE)) - player.width)
+				player.x = (width * (Block.BLOCK_SIZE * Block.SCALE)) - player.width;
 
 			if (player.y < 0)
 				player.y = 0;
-			if (player.y > (height * (Block.BLOCK_SIZE * Block.SCALE)))
-				player.y = (height * (Block.BLOCK_SIZE * Block.SCALE));
+			if (player.y > (height * (Block.BLOCK_SIZE * Block.SCALE)) - player.height)
+				player.y = (height * (Block.BLOCK_SIZE * Block.SCALE)) - player.height;
 		}
 	}
 
