@@ -73,7 +73,7 @@ class PlayState extends FlxState
 				} else if (overlappingBlock) continue;
 
 			if (!overlappingBlock)
-				blocks.add(new Block(1, player.x, player.y));
+				blocks.add(new Block(InventoryScreen.CURRENT_ITEM, player.x, player.y));
 		}
 
 		if (FlxG.keys.justPressed.E)

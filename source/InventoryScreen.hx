@@ -6,6 +6,8 @@ import flixel.FlxSubState;
 
 class InventoryScreen extends FlxSubState
 {
+	public static var CURRENT_ITEM:Int = 0;
+
 	var whiteBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height);
 
 	override function create()
