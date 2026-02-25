@@ -50,7 +50,7 @@ class InventoryScreen extends FlxSubState
 	{
 		super.update(elapsed);
 
-		if (FlxG.keys.justPressed.E && whiteBG.alpha > 0)
+		if (FlxG.keys.justPressed.ESCAPE)
 		{
 			FlxTween.tween(whiteBG, {alpha: 0}, 0.15, {
 				ease: FlxEase.quadInOut,
