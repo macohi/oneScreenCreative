@@ -56,9 +56,9 @@ class InventoryScreen extends FlxSubState
 		for (block in inventoryBlocks.members)
 		{
 			if (CURRENT_ITEM == block.blockID)
-				block.scale.set(1.5,1.5);
+				block.scale.set(Block.SCALE * 1.5, Block.SCALE * 1.5);
 			else
-				block.scale.set(1,1);
+				block.scale.set(Block.SCALE, Block.SCALE);
 		}
 
 		if (FlxG.keys.justPressed.ESCAPE)
