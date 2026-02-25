@@ -1,3 +1,4 @@
+import flixel.util.FlxColor;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.graphics.frames.FlxFrame;
 import flixel.graphics.FlxGraphic;
@@ -13,7 +14,7 @@ class InventoryScreen extends FlxSubState
 
 	var blockCount:Int = 2;
 
-	var whiteBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height);
+	var blackBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 
 	var inventoryBlocks:FlxTypedSpriteGroup<Block>;
 
@@ -21,11 +22,11 @@ class InventoryScreen extends FlxSubState
 	{
 		super.create();
 
-		whiteBG.alpha = 0;
-		add(whiteBG);
-		whiteBG.screenCenter();
+		blackBG.alpha = 0;
+		add(blackBG);
+		blackBG.screenCenter();
 
-		FlxTween.tween(whiteBG, {alpha: .75}, 1, {ease: FlxEase.quadInOut});
+		FlxTween.tween(blackBG, {alpha: .75}, 1, {ease: FlxEase.quadInOut});
 
 		inventoryBlocks = new FlxTypedSpriteGroup<Block>();
 		add(inventoryBlocks);
@@ -62,7 +63,7 @@ class InventoryScreen extends FlxSubState
 					startDelay: block.ID * 0.1
 				});
 
-			FlxTween.tween(whiteBG, {alpha: 0}, 1, {
+			FlxTween.tween(blackBG, {alpha: 0}, 1, {
 				ease: FlxEase.quadInOut,
 				onComplete: tween ->
 				{
