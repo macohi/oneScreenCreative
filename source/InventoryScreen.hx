@@ -85,14 +85,13 @@ class InventoryScreen extends FlxSubState
 			if (CURRENT_ITEM == block.blockID)
 			{
 				block.scale.set(Block.SCALE * 1.5, Block.SCALE * 1.5);
-				if (!transitioningOut)
-					camObj.x = block.x;
+				camObj.x = block.x;
 			}
 			else
 				block.scale.set(Block.SCALE, Block.SCALE);
 		}
 
-		if (FlxG.keys.justPressed.E && !transitioningIn)
+		if (FlxG.keys.justPressed.E && !transitioningIn && !transitioningOut)
 		{
 			transitioningOut = true;
 
