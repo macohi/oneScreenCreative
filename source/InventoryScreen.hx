@@ -47,22 +47,23 @@ class InventoryScreen extends FlxSubState
 		add(inventoryBlocks);
 		inventoryBlocks.cameras = [PlayState.CAM_INVENTORY];
 
+		var i = 0;
 		for (b in BlockManager.getBlockList())
 		{
 			var block = BlockManager.getNewBlock(b);
 			block.screenCenter();
 			block.alpha = 0;
 			block.x = -block.width;
-			block.ID = b;
+			block.ID = i;
 
-			FlxTween.tween(block, {alpha: 1, x: 32 + (b * (block.width * 2))}, 0.5, {
+			FlxTween.tween(block, {alpha: 1, x: 32 + (i * (block.width * 2))}, 0.5, {
 				ease: FlxEase.quadInOut,
 				startDelay: block.ID * 0.05
 			});
 
 			inventoryBlocks.add(block);
 
-			b++;
+			i++;
 		}
 	}
 
