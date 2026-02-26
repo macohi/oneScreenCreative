@@ -75,9 +75,9 @@ class InventoryScreen extends FlxSubState
 	{
 		super.update(elapsed);
 
-		if (FlxG.keys.anyJustPressed([A, LEFT]))
+		if (FlxG.keys.anyJustPressed([A, LEFT]) && !transitioningOut)
 			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, -1, blockCount - 1, 0);
-		if (FlxG.keys.anyJustPressed([D, RIGHT]))
+		if (FlxG.keys.anyJustPressed([D, RIGHT]) && !transitioningOut)
 			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, 1, blockCount - 1, 0);
 
 		for (block in inventoryBlocks.members)
