@@ -13,6 +13,21 @@ enum abstract BlockID(Int) from Int to Int
 	public function toInt()
 		return this;
 
+	public function toString()
+	{
+		return switch (this)
+		{
+			default: 'Unknown';
+			
+			case GRASS_BLOCK: 'Grass Block';
+			case COBBLESTONE: 'Cobblestone';
+			case PLANKS: 'Planks';
+			case DIRT: 'Dirt Block';
+			case TREE_LEAVES: 'Tree Leaves';
+			case TREE_TRUNK: 'Tree Trunk';
+		}
+	}
+
 	public inline function minMax(min:Int, max:Int)
 	{
 		if (this < min)
