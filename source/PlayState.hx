@@ -51,24 +51,24 @@ class PlayState extends FlxState
 		if (FlxG.keys.anyJustPressed([A, S, W, D, LEFT, DOWN, UP, RIGHT]))
 		{
 			if (FlxG.keys.anyJustPressed([A, LEFT]))
-				PLAYER.x -= PLAYER.width;
+				PLAYER.x -= (Block.BLOCK_SIZE * Block.SCALE);
 			if (FlxG.keys.anyJustPressed([D, RIGHT]))
-				PLAYER.x += PLAYER.width;
+				PLAYER.x += (Block.BLOCK_SIZE * Block.SCALE);
 
 			if (FlxG.keys.anyJustPressed([W, UP]))
-				PLAYER.y -= PLAYER.height;
+				PLAYER.y -= (Block.BLOCK_SIZE * Block.SCALE);
 			if (FlxG.keys.anyJustPressed([S, DOWN]))
-				PLAYER.y += PLAYER.height;
+				PLAYER.y += (Block.BLOCK_SIZE * Block.SCALE);
 
 			if (PLAYER.x < 0)
 				PLAYER.x = 0;
-			if (PLAYER.x > (width * (Block.BLOCK_SIZE * Block.SCALE)) - PLAYER.width)
-				PLAYER.x = (width * (Block.BLOCK_SIZE * Block.SCALE)) - PLAYER.width;
+			if (PLAYER.x > (width * (Block.BLOCK_SIZE * Block.SCALE)) - (Block.BLOCK_SIZE * Block.SCALE))
+				PLAYER.x = (width * (Block.BLOCK_SIZE * Block.SCALE)) - (Block.BLOCK_SIZE * Block.SCALE);
 
 			if (PLAYER.y < 0)
 				PLAYER.y = 0;
-			if (PLAYER.y > (height * (Block.BLOCK_SIZE * Block.SCALE)) - PLAYER.height)
-				PLAYER.y = (height * (Block.BLOCK_SIZE * Block.SCALE)) - PLAYER.height;
+			if (PLAYER.y > (height * (Block.BLOCK_SIZE * Block.SCALE)) - (Block.BLOCK_SIZE * Block.SCALE))
+				PLAYER.y = (height * (Block.BLOCK_SIZE * Block.SCALE)) - (Block.BLOCK_SIZE * Block.SCALE);
 		}
 
 		if (FlxG.keys.justPressed.ENTER)
