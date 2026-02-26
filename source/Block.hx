@@ -16,6 +16,11 @@ class Block extends FlxSprite
 		return blockID = newID;
 	}
 
+	public static var BLOCK_DIMENSION(get, never):Int;
+
+	static function get_BLOCK_DIMENSION():Int
+		return Math.round(BLOCK_SIZE * SCALE);
+
 	override public function new(blockID:BlockID, ?x:Float, ?y:Float)
 	{
 		super(x, y);

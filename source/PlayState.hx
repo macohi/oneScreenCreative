@@ -7,8 +7,8 @@ import flixel.FlxState;
 
 class PlayState extends FlxState
 {
-	var width:Int = Math.floor(FlxG.width / (Block.BLOCK_SIZE * Block.SCALE));
-	var height:Int = Math.floor(FlxG.height / (Block.BLOCK_SIZE * Block.SCALE)) + 1;
+	var width:Int = Math.floor(FlxG.width / Block.BLOCK_DIMENSION);
+	var height:Int = Math.floor(FlxG.height / Block.BLOCK_DIMENSION) + 1;
 
 	var blocks:FlxTypedSpriteGroup<Block>;
 
@@ -51,24 +51,24 @@ class PlayState extends FlxState
 		if (FlxG.keys.anyJustPressed([A, S, W, D, LEFT, DOWN, UP, RIGHT]))
 		{
 			if (FlxG.keys.anyJustPressed([A, LEFT]))
-				PLAYER.x -= (Block.BLOCK_SIZE * Block.SCALE);
+				PLAYER.x -= Block.BLOCK_DIMENSION;
 			if (FlxG.keys.anyJustPressed([D, RIGHT]))
-				PLAYER.x += (Block.BLOCK_SIZE * Block.SCALE);
+				PLAYER.x += Block.BLOCK_DIMENSION;
 
 			if (FlxG.keys.anyJustPressed([W, UP]))
-				PLAYER.y -= (Block.BLOCK_SIZE * Block.SCALE);
+				PLAYER.y -= Block.BLOCK_DIMENSION;
 			if (FlxG.keys.anyJustPressed([S, DOWN]))
-				PLAYER.y += (Block.BLOCK_SIZE * Block.SCALE);
+				PLAYER.y += Block.BLOCK_DIMENSION;
 
 			if (PLAYER.x < 0)
 				PLAYER.x = 0;
-			if (PLAYER.x > (width * (Block.BLOCK_SIZE * Block.SCALE)) - (Block.BLOCK_SIZE * Block.SCALE))
-				PLAYER.x = (width * (Block.BLOCK_SIZE * Block.SCALE)) - (Block.BLOCK_SIZE * Block.SCALE);
+			if (PLAYER.x > (width * Block.BLOCK_DIMENSION) - Block.BLOCK_DIMENSION)
+				PLAYER.x = (width * Block.BLOCK_DIMENSION) - Block.BLOCK_DIMENSION;
 
 			if (PLAYER.y < 0)
 				PLAYER.y = 0;
-			if (PLAYER.y > (height * (Block.BLOCK_SIZE * Block.SCALE)) - (Block.BLOCK_SIZE * Block.SCALE))
-				PLAYER.y = (height * (Block.BLOCK_SIZE * Block.SCALE)) - (Block.BLOCK_SIZE * Block.SCALE);
+			if (PLAYER.y > (height * Block.BLOCK_DIMENSION) - Block.BLOCK_DIMENSION)
+				PLAYER.y = (height * Block.BLOCK_DIMENSION) - Block.BLOCK_DIMENSION;
 		}
 
 		if (FlxG.keys.justPressed.ENTER)
@@ -102,8 +102,8 @@ class PlayState extends FlxState
 			w = 0;
 			while (w < width)
 			{
-				var x = w * (Block.BLOCK_SIZE * Block.SCALE);
-				var y = h * (Block.BLOCK_SIZE * Block.SCALE);
+				var x = w * Block.BLOCK_DIMENSION;
+				var y = h * Block.BLOCK_DIMENSION;
 
 				if (h >= Math.floor(height / 2))
 				{
