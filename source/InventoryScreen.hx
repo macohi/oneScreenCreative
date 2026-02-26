@@ -13,7 +13,7 @@ class InventoryScreen extends FlxSubState
 {
 	public static var CURRENT_ITEM:Int = 1;
 
-	var blockCount:Int = 3;
+	var blockCount:Int = 16;
 
 	var blackBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 
@@ -62,7 +62,7 @@ class InventoryScreen extends FlxSubState
 
 			FlxTween.tween(block, {alpha: 1, x: 32 + (b * (block.width * 2))}, 0.5, {
 				ease: FlxEase.quadInOut,
-				startDelay: block.ID * 0.1
+				startDelay: block.ID * 0.05
 			});
 
 			inventoryBlocks.add(block);
@@ -98,7 +98,7 @@ class InventoryScreen extends FlxSubState
 			for (block in inventoryBlocks.members)
 				FlxTween.tween(block, {alpha: 0, x: -block.width}, 0.5, {
 					ease: FlxEase.quadInOut,
-					startDelay: block.ID * 0.025
+					startDelay: block.ID * 0.05
 				});
 
 			FlxTween.cancelTweensOf(blackBG);
