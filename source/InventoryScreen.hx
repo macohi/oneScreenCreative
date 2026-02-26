@@ -13,7 +13,7 @@ class InventoryScreen extends FlxSubState
 {
 	public static var CURRENT_ITEM:Int = 1;
 
-	var blockCount:Int = 16;
+	var blockCount:Int = 3;
 
 	var blackBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 
