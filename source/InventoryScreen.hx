@@ -93,6 +93,7 @@ class InventoryScreen extends FlxSubState
 
 		if (FlxG.keys.justPressed.E && !transitioningIn && !transitioningOut)
 		{
+			trace(CURRENT_ITEM);
 			transitioningOut = true;
 
 			for (block in inventoryBlocks.members)
