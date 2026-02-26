@@ -50,10 +50,9 @@ class InventoryScreen extends FlxSubState
 		add(inventoryBlocks);
 		inventoryBlocks.cameras = [PlayState.CAM_INVENTORY];
 
-		var i = 0;
-		for (b in BlockManager.getBlockList())
+		for (i => b in BlockManager.blocksJSON?.blocks)
 		{
-			var block = BlockManager.getNewBlock(b);
+			var block = BlockManager.getNewBlock(i);
 			block.screenCenter();
 			block.alpha = 0;
 			block.x = -block.width;
@@ -65,8 +64,6 @@ class InventoryScreen extends FlxSubState
 			});
 
 			inventoryBlocks.add(block);
-
-			i++;
 		}
 
 		blockText = new FlxText();
@@ -93,7 +90,7 @@ class InventoryScreen extends FlxSubState
 		if (FlxG.keys.anyJustPressed([D, RIGHT]) && !transitioningOut)
 			CURRENT_ITEM.add(1);
 
-		CURRENT_ITEM.minMax(0, BlockManager.getBlockList().length - 1);
+		CURRENT_ITEM.minMax(0, (BlockManager.blocksJSON?.blocks?.length ?? 1) - 1);
 		PlayState.PLAYER.blockID = CURRENT_ITEM;
 
 		FlxG.watch.addQuick('CURRENT_ITEM', CURRENT_ITEM);

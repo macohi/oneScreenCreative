@@ -1,0 +1,10 @@
+{
+	"blocks": [
+		{ "name": "Grass Block", "frame": 0 },
+		{ "name": "Cobblestone", "frame": 1 },
+		{ "name": "Planks", "frame": 2 },
+		{ "name": "Dirt Block", "frame": 3 },
+		{ "name": "Tree Leaves", "frame": 4 },
+		{ "name": "Tree Trunk", "frame": 5 }
+	]
+}

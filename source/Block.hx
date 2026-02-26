@@ -10,7 +10,7 @@ class Block extends FlxSprite
 	function set_blockID(newID:BlockID):BlockID
 	{
 		loadGraphic('assets/blocks.png', true, BLOCK_SIZE, BLOCK_SIZE);
-		animation.add('block', [newID.toInt()], 24);
+		animation.add('block', [BlockManager.blocksJSON?.blocks[newID.toInt()]?.frame ?? 0], 24);
 		animation.play('block');
 
 		return blockID = newID;

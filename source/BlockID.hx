@@ -15,17 +15,7 @@ enum abstract BlockID(Int) from Int to Int
 
 	public function toString()
 	{
-		return switch (this)
-		{
-			default: 'Unknown';
-			
-			case GRASS_BLOCK: 'Grass Block';
-			case COBBLESTONE: 'Cobblestone';
-			case PLANKS: 'Planks';
-			case DIRT: 'Dirt Block';
-			case TREE_LEAVES: 'Tree Leaves';
-			case TREE_TRUNK: 'Tree Trunk';
-		}
+		return BlockManager.blocksJSON?.blocks[toInt()]?.name ?? 'Unknown';
 	}
 
 	public inline function minMax(min:Int, max:Int)
@@ -40,5 +30,7 @@ enum abstract BlockID(Int) from Int to Int
 		this += amount;
 
 	public static function list()
+	{
 		return [GRASS_BLOCK, COBBLESTONE, PLANKS, DIRT, TREE_LEAVES, TREE_TRUNK,];
+	}
 }
