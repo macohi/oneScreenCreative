@@ -5,7 +5,7 @@ class Block extends FlxSprite
 	public static var SCALE:Float = 2;
 	public static var BLOCK_SIZE:Int = 16;
 
-	public var blockID(default, set):BlockID = GRASS_BLOCK;
+	public var blockID(default, set):BlockID = 0;
 
 	function set_blockID(newID:BlockID):BlockID
 	{

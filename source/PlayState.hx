@@ -107,7 +107,7 @@ class PlayState extends FlxState
 
 				if (h >= Math.floor(height / 2))
 				{
-					var block:BlockID = (h == Math.floor(height / 2)) ? GRASS_BLOCK : COBBLESTONE;
+					var block:BlockID = (h == Math.floor(height / 2)) ? 0 : 1;
 
 					var newblock = new Block(block, x, y);
 					blocks.add(newblock);

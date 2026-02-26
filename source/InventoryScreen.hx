@@ -10,7 +10,7 @@ import flixel.FlxSubState;
 
 class InventoryScreen extends FlxSubState
 {
-	public static var CURRENT_ITEM:BlockID = BlockID.COBBLESTONE;
+	public static var CURRENT_ITEM:BlockID = 0;
 
 	var blackBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 

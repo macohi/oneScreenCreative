@@ -1,12 +1,5 @@
 enum abstract BlockID(Int) from Int to Int
 {
-	var GRASS_BLOCK = 0;
-	var COBBLESTONE = 1;
-	var PLANKS = 2;
-	var DIRT = 3;
-	var TREE_LEAVES = 4;
-	var TREE_TRUNK = 5;
-
 	public function compare(against:BlockID)
 		return this == against;
 
@@ -28,9 +21,4 @@ enum abstract BlockID(Int) from Int to Int
 
 	public inline function add(amount:Int)
 		this += amount;
-
-	public static function list()
-	{
-		return [GRASS_BLOCK, COBBLESTONE, PLANKS, DIRT, TREE_LEAVES, TREE_TRUNK,];
-	}
 }
