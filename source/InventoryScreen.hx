@@ -1,7 +1,4 @@
-import BlockManager.BlockID;
 import flixel.FlxObject;
-import flixel.FlxCamera;
-import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.tweens.FlxEase;
@@ -50,9 +47,9 @@ class InventoryScreen extends FlxSubState
 		add(inventoryBlocks);
 		inventoryBlocks.cameras = [PlayState.CAM_INVENTORY];
 
-		for (b in BlockManager.getBlockIDList())
+		for (b in BlockManager.getBlockList())
 		{
-			var block = BlockManager.getNewBlock(b, 0, 0);
+			var block = BlockManager.getNewBlock(b);
 			block.screenCenter();
 			block.alpha = 0;
 			block.x = -block.width;
@@ -77,12 +74,17 @@ class InventoryScreen extends FlxSubState
 			CURRENT_ITEM.add(-1);
 		if (FlxG.keys.anyJustPressed([D, RIGHT]) && !transitioningOut)
 			CURRENT_ITEM.add(1);
-		
-		CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, BlockManager.getBlockIDList().length - 1, 0);
+
+		CURRENT_ITEM.minMax(0, BlockManager.getBlockList().length - 1);
+		PlayState.PLAYER.blockID = CURRENT_ITEM;
+
+		FlxG.watch.addQuick('CURRENT_ITEM', CURRENT_ITEM);
 
 		for (block in inventoryBlocks.members)
 		{
-			if (CURRENT_ITEM.toInt() == block.blockID.toInt())
+			FlxG.watch.addQuick('block (${block.blockID})', block.blockID);
+			
+			if (CURRENT_ITEM.compare(block.blockID))
 			{
 				block.scale.set(Block.SCALE * 1.5, Block.SCALE * 1.5);
 				camObj.x = block.x;
@@ -91,10 +93,9 @@ class InventoryScreen extends FlxSubState
 				block.scale.set(Block.SCALE, Block.SCALE);
 		}
 
-		if (FlxG.keys.justPressed.E && !transitioningIn && !transitioningOut)
+		if (FlxG.keys.justPressed.E && (!transitioningIn && !transitioningOut))
 		{
 			trace('New item: ' + CURRENT_ITEM);
-			PlayState.PLAYER.blockID = CURRENT_ITEM;
 
 			transitioningOut = true;
 

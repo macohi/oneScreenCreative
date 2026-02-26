@@ -1,7 +1,6 @@
 package;
 
 import flixel.FlxCamera;
-import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
 import flixel.FlxState;
@@ -108,7 +107,7 @@ class PlayState extends FlxState
 
 				if (h >= Math.floor(height / 2))
 				{
-					var block = (h == Math.floor(height / 2)) ? 0 : 1;
+					var block:BlockID = (h == Math.floor(height / 2)) ? GRASS_BLOCK : COBBLESTONE;
 
 					var newblock = new Block(block, x, y);
 					blocks.add(newblock);
