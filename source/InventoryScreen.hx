@@ -57,7 +57,7 @@ class InventoryScreen extends FlxSubState
 			var block = new Block(b, 0, 0);
 			block.screenCenter();
 			block.alpha = 0;
-			block.x = FlxG.camera.x - (block.width * 4);
+			block.x = -block.width;
 			block.ID = b;
 
 			FlxTween.tween(block, {alpha: 1, x: 32 + (b * (block.width * 2))}, 0.5, {
@@ -96,9 +96,9 @@ class InventoryScreen extends FlxSubState
 			transitioningOut = true;
 
 			for (block in inventoryBlocks.members)
-				FlxTween.tween(block, {alpha: 0, x: FlxG.camera.x - (block.width * 4)}, 0.5, {
+				FlxTween.tween(block, {alpha: 0, x: -block.width}, 0.5, {
 					ease: FlxEase.quadInOut,
-					startDelay: block.ID * 0.1
+					startDelay: block.ID * 0.025
 				});
 
 			FlxTween.cancelTweensOf(blackBG);
