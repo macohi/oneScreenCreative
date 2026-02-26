@@ -1,3 +1,5 @@
+import flixel.FlxObject;
+import flixel.FlxCamera;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
@@ -17,19 +19,36 @@ class InventoryScreen extends FlxSubState
 
 	var inventoryBlocks:FlxTypedSpriteGroup<Block>;
 
+	var transitioning:Bool = true;
+
+	var camObj:FlxObject;
+
 	override function create()
 	{
 		super.create();
 
+		camObj = new FlxObject();
+		add(camObj);
+
+		PlayState.CAM_INVENTORY.follow(camObj, LOCKON, 0.4);
+
 		blackBG.alpha = 0;
 		add(blackBG);
 		blackBG.screenCenter();
+		blackBG.cameras = [PlayState.CAM_HUD];
 
 		FlxTween.cancelTweensOf(blackBG);
-		FlxTween.tween(blackBG, {alpha: .75}, 1, {ease: FlxEase.quadInOut});
+		FlxTween.tween(blackBG, {alpha: .75}, 1, {
+			ease: FlxEase.quadInOut,
+			onComplete: tween ->
+			{
+				transitioning = false;
+			}
+		});
 
 		inventoryBlocks = new FlxTypedSpriteGroup<Block>();
 		add(inventoryBlocks);
+		inventoryBlocks.cameras = [PlayState.CAM_INVENTORY];
 
 		var b = 0;
 		while (b < blockCount)
@@ -56,20 +75,26 @@ class InventoryScreen extends FlxSubState
 		super.update(elapsed);
 
 		if (FlxG.keys.anyJustPressed([A, LEFT]))
-			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, -1, blockCount, 0);
+			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, -1, blockCount - 1, 0);
 		if (FlxG.keys.anyJustPressed([D, RIGHT]))
-			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, 1, blockCount, 0);
+			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, 1, blockCount - 1, 0);
 
 		for (block in inventoryBlocks.members)
 		{
 			if (CURRENT_ITEM == block.blockID)
+			{
 				block.scale.set(Block.SCALE * 1.5, Block.SCALE * 1.5);
+				if (!transitioning)
+					camObj.x = block.x;
+			}
 			else
 				block.scale.set(Block.SCALE, Block.SCALE);
 		}
 
-		if (FlxG.keys.justPressed.E && blackBG.alpha > 0)
+		if (FlxG.keys.justPressed.E && !transitioning)
 		{
+			transitioning = true;
+
 			for (block in inventoryBlocks.members)
 				FlxTween.tween(block, {alpha: 0, x: FlxG.camera.x - (block.width * 4)}, 0.5, {
 					ease: FlxEase.quadInOut,

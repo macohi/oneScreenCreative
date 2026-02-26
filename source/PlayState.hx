@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxCamera;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
@@ -14,15 +15,30 @@ class PlayState extends FlxState
 
 	var player:FlxSprite;
 
+	public static var CAM_GAME:FlxCamera;
+	public static var CAM_HUD:FlxCamera;
+	public static var CAM_INVENTORY:FlxCamera;
+
 	override public function create()
 	{
 		super.create();
 
+		CAM_GAME = new FlxCamera();
+		CAM_HUD = new FlxCamera();
+		CAM_INVENTORY = new FlxCamera();
+		FlxG.cameras.add(CAM_GAME);
+		FlxG.cameras.add(CAM_HUD);
+		FlxG.cameras.add(CAM_INVENTORY);
+		CAM_HUD.bgColor.alpha = 0;
+		CAM_INVENTORY.bgColor.alpha = 0;
+
 		blocks = new FlxTypedSpriteGroup<Block>();
 		add(blocks);
+		blocks.cameras = [CAM_GAME];
 
 		player = new FlxSprite();
 		add(player);
+		player.cameras = [CAM_GAME];
 
 		player.makeGraphic(Block.BLOCK_SIZE, Block.BLOCK_SIZE);
 		player.scale.set(Block.SCALE, Block.SCALE);
