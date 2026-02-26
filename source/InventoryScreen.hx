@@ -1,3 +1,4 @@
+import BlockManager.BlockID;
 import flixel.FlxObject;
 import flixel.FlxCamera;
 import flixel.math.FlxMath;
@@ -11,9 +12,7 @@ import flixel.FlxSubState;
 
 class InventoryScreen extends FlxSubState
 {
-	public static var CURRENT_ITEM:Int = 1;
-
-	var blockCount:Int = 6;
+	public static var CURRENT_ITEM:Int = BlockID.COBBLESTONE;
 
 	var blackBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 
@@ -51,10 +50,9 @@ class InventoryScreen extends FlxSubState
 		add(inventoryBlocks);
 		inventoryBlocks.cameras = [PlayState.CAM_INVENTORY];
 
-		var b = 0;
-		while (b < blockCount)
+		for (b in BlockManager.getBlockIDList())
 		{
-			var block = new Block(b, 0, 0);
+			var block = BlockManager.getNewBlock(b, 0, 0);
 			block.screenCenter();
 			block.alpha = 0;
 			block.x = -block.width;
@@ -76,9 +74,15 @@ class InventoryScreen extends FlxSubState
 		super.update(elapsed);
 
 		if (FlxG.keys.anyJustPressed([A, LEFT]) && !transitioningOut)
-			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, -1, blockCount - 1, 0);
+		{
+			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, -1, BlockManager.getBlockIDList().length - 1, 0);
+			PlayState.PLAYER.blockID = CURRENT_ITEM;
+		}
 		if (FlxG.keys.anyJustPressed([D, RIGHT]) && !transitioningOut)
-			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, 1, blockCount - 1, 0);
+		{
+			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, 1, BlockManager.getBlockIDList().length - 1, 0);
+			PlayState.PLAYER.blockID = CURRENT_ITEM;
+		}
 
 		for (block in inventoryBlocks.members)
 		{
@@ -93,7 +97,9 @@ class InventoryScreen extends FlxSubState
 
 		if (FlxG.keys.justPressed.E && !transitioningIn && !transitioningOut)
 		{
-			trace(CURRENT_ITEM);
+			trace('New item: ' + CURRENT_ITEM);
+			PlayState.PLAYER.blockID = CURRENT_ITEM;
+
 			transitioningOut = true;
 
 			for (block in inventoryBlocks.members)

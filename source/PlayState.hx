@@ -13,7 +13,7 @@ class PlayState extends FlxState
 
 	var blocks:FlxTypedSpriteGroup<Block>;
 
-	var player:FlxSprite;
+	public static var PLAYER:Block;
 
 	public static var CAM_GAME:FlxCamera;
 	public static var CAM_HUD:FlxCamera;
@@ -36,14 +36,11 @@ class PlayState extends FlxState
 		add(blocks);
 		blocks.cameras = [CAM_GAME];
 
-		player = new FlxSprite();
-		add(player);
-		player.cameras = [CAM_GAME];
+		PLAYER = BlockManager.getNewBlock(InventoryScreen.CURRENT_ITEM, 0,0);
+		add(PLAYER);
+		PLAYER.cameras = [CAM_GAME];
 
-		player.makeGraphic(Block.BLOCK_SIZE, Block.BLOCK_SIZE);
-		player.scale.set(Block.SCALE, Block.SCALE);
-		player.updateHitbox();
-		player.alpha = .5;
+		PLAYER.alpha = .5;
 
 		generateWorld();
 	}
@@ -55,24 +52,24 @@ class PlayState extends FlxState
 		if (FlxG.keys.anyJustPressed([A, S, W, D, LEFT, DOWN, UP, RIGHT]))
 		{
 			if (FlxG.keys.anyJustPressed([A, LEFT]))
-				player.x -= player.width;
+				PLAYER.x -= PLAYER.width;
 			if (FlxG.keys.anyJustPressed([D, RIGHT]))
-				player.x += player.width;
+				PLAYER.x += PLAYER.width;
 
 			if (FlxG.keys.anyJustPressed([W, UP]))
-				player.y -= player.height;
+				PLAYER.y -= PLAYER.height;
 			if (FlxG.keys.anyJustPressed([S, DOWN]))
-				player.y += player.height;
+				PLAYER.y += PLAYER.height;
 
-			if (player.x < 0)
-				player.x = 0;
-			if (player.x > (width * (Block.BLOCK_SIZE * Block.SCALE)) - player.width)
-				player.x = (width * (Block.BLOCK_SIZE * Block.SCALE)) - player.width;
+			if (PLAYER.x < 0)
+				PLAYER.x = 0;
+			if (PLAYER.x > (width * (Block.BLOCK_SIZE * Block.SCALE)) - PLAYER.width)
+				PLAYER.x = (width * (Block.BLOCK_SIZE * Block.SCALE)) - PLAYER.width;
 
-			if (player.y < 0)
-				player.y = 0;
-			if (player.y > (height * (Block.BLOCK_SIZE * Block.SCALE)) - player.height)
-				player.y = (height * (Block.BLOCK_SIZE * Block.SCALE)) - player.height;
+			if (PLAYER.y < 0)
+				PLAYER.y = 0;
+			if (PLAYER.y > (height * (Block.BLOCK_SIZE * Block.SCALE)) - PLAYER.height)
+				PLAYER.y = (height * (Block.BLOCK_SIZE * Block.SCALE)) - PLAYER.height;
 		}
 
 		if (FlxG.keys.justPressed.ENTER)
@@ -80,7 +77,7 @@ class PlayState extends FlxState
 			var overlappingBlock:Bool = false;
 
 			for (block in blocks.members)
-				if (player.overlaps(block))
+				if (PLAYER.overlaps(block))
 				{
 					overlappingBlock = true;
 
@@ -89,7 +86,7 @@ class PlayState extends FlxState
 				} else if (overlappingBlock) continue;
 
 			if (!overlappingBlock)
-				blocks.add(new Block(InventoryScreen.CURRENT_ITEM, player.x, player.y));
+				blocks.add(BlockManager.getNewBlock(InventoryScreen.CURRENT_ITEM, PLAYER.x, PLAYER.y));
 		}
 
 		if (FlxG.keys.justPressed.E)
@@ -119,7 +116,7 @@ class PlayState extends FlxState
 
 				if (h == Math.floor(height / 2) - 1)
 					if (w == Math.floor(width / 2))
-						player.setPosition(x, y);
+						PLAYER.setPosition(x, y);
 
 				w++;
 			}
