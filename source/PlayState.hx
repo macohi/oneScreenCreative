@@ -4,6 +4,7 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
 import flixel.FlxState;
+import blocks.Block;
 
 class PlayState extends FlxState
 {

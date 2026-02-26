@@ -1,3 +1,5 @@
+package blocks;
+
 import flixel.FlxSprite;
 
 class Block extends FlxSprite
