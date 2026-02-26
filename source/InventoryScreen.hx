@@ -1,3 +1,4 @@
+import flixel.text.FlxText;
 import flixel.FlxObject;
 import flixel.util.FlxColor;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
@@ -19,6 +20,8 @@ class InventoryScreen extends FlxSubState
 	var transitioningOut:Bool = false;
 
 	var camObj:FlxObject;
+
+	var blockText:FlxText;
 
 	override function create()
 	{
@@ -65,6 +68,20 @@ class InventoryScreen extends FlxSubState
 
 			i++;
 		}
+
+		blockText = new FlxText();
+		blockText.cameras = [PlayState.CAM_HUD];
+
+		blockText.size = 24;
+
+		add(blockText);
+
+		blockText.alpha = 0;
+
+		FlxTween.cancelTweensOf(blockText);
+		FlxTween.tween(blockText, {alpha: 1}, 1, {
+			ease: FlxEase.quadInOut
+		});
 	}
 
 	override function update(elapsed:Float)
@@ -81,14 +98,18 @@ class InventoryScreen extends FlxSubState
 
 		FlxG.watch.addQuick('CURRENT_ITEM', CURRENT_ITEM);
 
+		blockText.text = CURRENT_ITEM.toString();
+		blockText.screenCenter();
+		blockText.y += blockText.height * 1.5;
+
 		for (block in inventoryBlocks.members)
 		{
 			FlxG.watch.addQuick('block (${block.blockID})', block.blockID);
-			
+
 			if (CURRENT_ITEM.compare(block.blockID))
 			{
 				block.scale.set(Block.SCALE * 1.5, Block.SCALE * 1.5);
-				camObj.x = block.x;
+				camObj.x = block.getGraphicMidpoint().x;
 			}
 			else
 				block.scale.set(Block.SCALE, Block.SCALE);
@@ -113,6 +134,11 @@ class InventoryScreen extends FlxSubState
 				{
 					close();
 				}
+			});
+
+			FlxTween.cancelTweensOf(blockText);
+			FlxTween.tween(blockText, {alpha: 0}, 1, {
+				ease: FlxEase.quadInOut
 			});
 		}
 	}
