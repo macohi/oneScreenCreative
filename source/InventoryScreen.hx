@@ -53,7 +53,7 @@ class InventoryScreen extends FlxSubState
 
 		for (i => b in BlockManager.blocksJSON?.blocks)
 		{
-			var block = BlockManager.getNewBlock(i);
+			var block = BlockManager.getNewBlock(i, 0, 0, true);
 			block.screenCenter();
 			block.alpha = 0;
 			block.x = -block.width;

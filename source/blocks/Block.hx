@@ -4,6 +4,8 @@ import flixel.FlxSprite;
 
 class Block extends FlxSprite
 {
+	public var debugMode:Bool = false;
+
 	public static var SCALE:Float = 2;
 	public static var BLOCK_SIZE:Int = 16;
 
@@ -23,10 +25,11 @@ class Block extends FlxSprite
 	static function get_BLOCK_DIMENSION():Int
 		return Math.round(BLOCK_SIZE * SCALE);
 
-	override public function new(blockID:BlockID, ?x:Float, ?y:Float)
+	override public function new(blockID:BlockID, ?x:Float, ?y:Float, ?debugMode:Bool)
 	{
 		super(x, y);
 
+		this.debugMode = debugMode;
 		this.blockID = blockID;
 
 		this.scale.set(SCALE, SCALE);

@@ -7,14 +7,15 @@ class BlockTreeTrunk extends Block
 	override function set_blockID(newID:BlockID):BlockID
 	{
 		loadGraphic('assets/blocks.png', true, Block.BLOCK_SIZE, Block.BLOCK_SIZE);
-		animation.add('block', [FlxG.random.int(newID, newID + 1)], 24);
+		if (debugMode) animation.add('block', [5, 6], 2);
+		if (!debugMode) animation.add('block', [FlxG.random.int(5, 6)], 24);
 		animation.play('block');
 
 		return blockID = newID;
 	}
 
-	override public function new(?x:Float, ?y:Float)
+	override public function new(?x:Float, ?y:Float, ?debugMode:Bool)
 	{
-		super(5, x, y);
+		super(5, x, y, debugMode);
 	}
 }
