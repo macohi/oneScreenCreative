@@ -19,7 +19,8 @@ class InventoryScreen extends FlxSubState
 
 	var inventoryBlocks:FlxTypedSpriteGroup<Block>;
 
-	var transitioning:Bool = true;
+	var transitioningIn:Bool = true;
+	var transitioningOut:Bool = false;
 
 	var camObj:FlxObject;
 
@@ -27,7 +28,7 @@ class InventoryScreen extends FlxSubState
 	{
 		super.create();
 
-		camObj = new FlxObject();
+		camObj = new FlxObject(0, FlxG.height / 2);
 		add(camObj);
 
 		PlayState.CAM_INVENTORY.follow(camObj, LOCKON, 0.4);
@@ -42,7 +43,7 @@ class InventoryScreen extends FlxSubState
 			ease: FlxEase.quadInOut,
 			onComplete: tween ->
 			{
-				transitioning = false;
+				transitioningIn = false;
 			}
 		});
 
@@ -84,16 +85,16 @@ class InventoryScreen extends FlxSubState
 			if (CURRENT_ITEM == block.blockID)
 			{
 				block.scale.set(Block.SCALE * 1.5, Block.SCALE * 1.5);
-				if (!transitioning)
+				if (!transitioningOut)
 					camObj.x = block.x;
 			}
 			else
 				block.scale.set(Block.SCALE, Block.SCALE);
 		}
 
-		if (FlxG.keys.justPressed.E && !transitioning)
+		if (FlxG.keys.justPressed.E && !transitioningIn)
 		{
-			transitioning = true;
+			transitioningOut = true;
 
 			for (block in inventoryBlocks.members)
 				FlxTween.tween(block, {alpha: 0, x: FlxG.camera.x - (block.width * 4)}, 0.5, {
