@@ -1,5 +1,6 @@
 package;
 
+import flixel.math.FlxPoint;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
@@ -8,6 +9,8 @@ import blocks.Block;
 
 class PlayState extends FlxState
 {
+	public static var instance:PlayState;
+
 	var width:Int = Math.floor(FlxG.width / Block.BLOCK_DIMENSION);
 	var height:Int = Math.floor(FlxG.height / Block.BLOCK_DIMENSION) + 1;
 
@@ -23,6 +26,9 @@ class PlayState extends FlxState
 	{
 		super.create();
 
+		instance = null;
+		instance = this;
+
 		CAM_GAME = new FlxCamera();
 		CAM_HUD = new FlxCamera();
 		CAM_INVENTORY = new FlxCamera();
@@ -36,13 +42,28 @@ class PlayState extends FlxState
 		add(blocks);
 		blocks.cameras = [CAM_GAME];
 
-		PLAYER = BlockManager.getNewBlock(InventoryScreen.CURRENT_ITEM, 0,0);
-		add(PLAYER);
+		reloadPlayer();
+
+		generateWorld();
+	}
+
+	public static function reloadPlayer()
+	{
+		var prevPos = FlxPoint.get();
+
+		if (PLAYER != null)
+		{
+			prevPos.set(PLAYER.x, PLAYER.y);
+
+			instance.members.remove(PLAYER);
+			PLAYER.destroy();
+		}
+
+		PLAYER = BlockManager.getNewBlock(InventoryScreen.CURRENT_ITEM, prevPos.x, prevPos.y, true);
+		instance.add(PLAYER);
 		PLAYER.cameras = [CAM_GAME];
 
 		PLAYER.alpha = .5;
-
-		generateWorld();
 	}
 
 	override public function update(elapsed:Float)
@@ -83,7 +104,9 @@ class PlayState extends FlxState
 
 					blocks.members.remove(block);
 					block.destroy();
-				} else if (overlappingBlock) continue;
+				}
+				else if (overlappingBlock)
+					continue;
 
 			if (!overlappingBlock)
 				blocks.add(BlockManager.getNewBlock(InventoryScreen.CURRENT_ITEM, PLAYER.x, PLAYER.y));

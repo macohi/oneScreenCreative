@@ -116,6 +116,7 @@ class InventoryScreen extends FlxSubState
 		if (FlxG.keys.justPressed.E && (!transitioningIn && !transitioningOut))
 		{
 			trace('New item: $CURRENT_ITEM');
+			PlayState.reloadPlayer();
 
 			transitioningOut = true;
 
