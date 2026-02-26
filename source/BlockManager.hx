@@ -10,6 +10,9 @@ enum abstract BlockID(Int) from Int to Int
 	public function toInt()
 		return this;
 
+	public inline function add(amount:Int)
+		this += amount;
+
 	public static function getIDS()
 		return [GRASS_BLOCK, COBBLESTONE, PLANKS, DIRT, TREE_LEAVES, TREE_TRUNK,];
 }

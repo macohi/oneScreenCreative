@@ -12,7 +12,7 @@ import flixel.FlxSubState;
 
 class InventoryScreen extends FlxSubState
 {
-	public static var CURRENT_ITEM:Int = BlockID.COBBLESTONE;
+	public static var CURRENT_ITEM:BlockID = BlockID.COBBLESTONE;
 
 	var blackBG:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 
@@ -74,19 +74,15 @@ class InventoryScreen extends FlxSubState
 		super.update(elapsed);
 
 		if (FlxG.keys.anyJustPressed([A, LEFT]) && !transitioningOut)
-		{
-			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, -1, BlockManager.getBlockIDList().length - 1, 0);
-			PlayState.PLAYER.blockID = CURRENT_ITEM;
-		}
+			CURRENT_ITEM.add(-1);
 		if (FlxG.keys.anyJustPressed([D, RIGHT]) && !transitioningOut)
-		{
-			CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, 1, BlockManager.getBlockIDList().length - 1, 0);
-			PlayState.PLAYER.blockID = CURRENT_ITEM;
-		}
+			CURRENT_ITEM.add(1);
+		
+		CURRENT_ITEM = FlxMath.maxAdd(CURRENT_ITEM, BlockManager.getBlockIDList().length - 1, 0);
 
 		for (block in inventoryBlocks.members)
 		{
-			if (CURRENT_ITEM == block.blockID)
+			if (CURRENT_ITEM.toInt() == block.blockID.toInt())
 			{
 				block.scale.set(Block.SCALE * 1.5, Block.SCALE * 1.5);
 				camObj.x = block.x;
