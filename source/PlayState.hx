@@ -1,5 +1,6 @@
 package;
 
+import openfl.net.FileReference;
 import flixel.math.FlxPoint;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -124,8 +125,10 @@ class PlayState extends FlxState
 		if (FlxG.keys.justPressed.E)
 			openSubState(new InventoryScreen());
 
-		if (FlxG.keys.justPressed.C)
-			World.generateWorldString();
+		if (FlxG.keys.pressed.CONTROL && FlxG.keys.justReleased.S)
+			WorldSaves.saveStringWorld();
+		if (FlxG.keys.pressed.CONTROL && FlxG.keys.justReleased.O)
+			WorldSaves.loadStringWorld();
 	}
 
 	public function generateBasicWorld()
