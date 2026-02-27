@@ -11,10 +11,10 @@ class PlayState extends FlxState
 {
 	public static var instance:PlayState;
 
-	var width:Int = Math.floor(FlxG.width / Block.BLOCK_DIMENSION);
-	var height:Int = Math.floor(FlxG.height / Block.BLOCK_DIMENSION) + 1;
+	public var width:Int = Math.floor(FlxG.width / Block.BLOCK_DIMENSION);
+	public var height:Int = Math.floor(FlxG.height / Block.BLOCK_DIMENSION) + 1;
 
-	var blocks:FlxTypedSpriteGroup<Block>;
+	public var blocks:FlxTypedSpriteGroup<Block>;
 
 	public static var PLAYER:Block;
 
