@@ -46,7 +46,7 @@ class PlayState extends FlxState
 
 		// generateBasicWorld();
 
-		World.parseWorldString('i1x0y0_i3x0y0');
+		World.parseWorldString(World.BASIC_WORLD_STRING);
 	}
 
 	public static function reloadPlayer()
@@ -153,5 +153,7 @@ class PlayState extends FlxState
 		}
 
 		trace('Generated Basic World! (${blocks.members.length} blocks)');
+
+		World.generateWorldString();
 	}
 }
