@@ -23,6 +23,9 @@ class World
 				var int = Std.parseInt(piece.substr(2));
 
 				trace('STARTING $symbol : $int');
+
+				if (symbol == 'x') x = int;
+				if (symbol == 'y') y = int;
 			}
 		}
 	}
