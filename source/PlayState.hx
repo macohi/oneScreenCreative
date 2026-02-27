@@ -44,7 +44,9 @@ class PlayState extends FlxState
 
 		reloadPlayer();
 
-		generateWorld();
+		generateBasicWorld();
+
+		World.parseWorldString('sx0_sy0_i1r10_i-1r10');
 	}
 
 	public static function reloadPlayer()
@@ -57,6 +59,13 @@ class PlayState extends FlxState
 
 			instance.members.remove(PLAYER);
 			PLAYER.destroy();
+		}
+		else
+		{
+			var x = (Math.floor(instance.height / 2) - 1) * Block.BLOCK_DIMENSION;
+			var y = (Math.floor(instance.width / 2) - 1) * Block.BLOCK_DIMENSION;
+
+			PLAYER.setPosition(x, y);
 		}
 
 		PLAYER = BlockManager.getNewBlock(InventoryScreen.CURRENT_ITEM, prevPos.x, prevPos.y, true);
@@ -116,7 +125,7 @@ class PlayState extends FlxState
 			openSubState(new InventoryScreen());
 	}
 
-	public function generateWorld()
+	public function generateBasicWorld()
 	{
 		var w = 0;
 		var h = 0;
@@ -137,16 +146,12 @@ class PlayState extends FlxState
 					blocks.add(newblock);
 				}
 
-				if (h == Math.floor(height / 2) - 1)
-					if (w == Math.floor(width / 2))
-						PLAYER.setPosition(x, y);
-
 				w++;
 			}
 
 			h++;
 		}
 
-		trace('Generated world! (${blocks.members.length} blocks)');
+		trace('Generated Basic World! (${blocks.members.length} blocks)');
 	}
 }
