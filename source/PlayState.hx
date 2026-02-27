@@ -125,9 +125,9 @@ class PlayState extends FlxState
 		if (FlxG.keys.justPressed.E)
 			openSubState(new InventoryScreen());
 
-		if (FlxG.keys.pressed.CONTROL && FlxG.keys.justReleased.S)
+		if (FlxG.keys.pressed.CONTROL && FlxG.keys.justReleased.C)
 			WorldSaves.saveStringWorld();
-		if (FlxG.keys.pressed.CONTROL && FlxG.keys.justReleased.O)
+		if (FlxG.keys.pressed.CONTROL && FlxG.keys.justReleased.V)
 			WorldSaves.loadStringWorld();
 	}
 
