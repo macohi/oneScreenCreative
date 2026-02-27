@@ -4,7 +4,7 @@
 
 	<!-- ________________________ Application Settings _________________________ -->
 
-	<app title="Onrev" file="Onrev" main="Main" version="0.0.3" company="Macohi" />
+	<app title="Onrev" file="Onrev" main="Main" version="0.0.4" company="Macohi" />
 
 	<app preloader="flixel.system.FlxPreloader" />
 
