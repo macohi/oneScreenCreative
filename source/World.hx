@@ -151,6 +151,10 @@ class World
 			}
 		}
 
+		#if WORLD_REMOVE_TRAILING_UNDERSCORE
+		world = world.substr(0, world.length - 1);
+		#end
+
 		trace('Generated String World Key: $world');
 		return world;
 	}
