@@ -1,8 +1,10 @@
+import blocks.Block;
+
 using StringTools;
 
 class World
 {
-	// sx0_sy0_i1r10_i-1r10
+	// i1x0y0_i3x0y0
 	public static function parseWorldString(world:String)
 	{
 		var game:PlayState = PlayState.instance;
@@ -10,45 +12,46 @@ class World
 		var x:Int = 0;
 		var y:Int = 0;
 
-		var blockInfo:Array<Dynamic> = [];
+		var blockData:Array<Dynamic> = [];
 
 		trace('Parsing world: $world');
 
 		for (piece in world.split('_'))
 		{
-			if (x > game.width)
-			{
-				trace(Math.floor(x / game.width));
-				y++;
-			}
-
 			trace(piece);
-
-			if (piece.startsWith('s'))
-			{
-				var symbol = piece.substr(1, 1);
-				var int = Std.parseInt(piece.substr(2));
-
-				trace('STARTING $symbol : $int');
-
-				if (symbol == 'x')
-					x = int;
-				if (symbol == 'y')
-					y = int;
-			}
 
 			if (piece.startsWith('i'))
 			{
 				piece = piece.substr(1);
 
-				var blockID = Std.parseInt(piece.split('r')[0]);
-				var repeat = Std.parseInt(piece.split('r')[1]);
-
-				trace('Block: $blockID : Repeat: $repeat');
+				var blockID = Std.parseInt(piece.split('x')[0]);
+				var blockX = Std.parseInt(piece.split('x')[1].split('y')[0]);
+				var blockY = Std.parseInt(piece.split('x')[1].split('y')[1]);
 
 				if (blockID < 0)
-					x += repeat;
+					continue;
+
+				var block = {
+					id: blockID,
+					x: blockX,
+					y: blockY,
+				};
+
+				for (oblock in blockData)
+					if (oblock.x == block.x && oblock.y == block.y)
+						continue;
+
+				trace(block);
+				blockData.push(block);
 			}
 		}
+
+		for (block in blockData)
+		{
+			var newBlock:Block = new Block(block.id, block.x, block.y, false);
+			game.blocks.add(newBlock);
+		}
+
+		trace('Generated String World! (${blockData.length} blocks)');
 	}
 }
