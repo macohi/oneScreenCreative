@@ -44,7 +44,7 @@ class PlayState extends FlxState
 
 		reloadPlayer();
 
-		generateBasicWorld();
+		// generateBasicWorld();
 
 		World.parseWorldString('sx0_sy0_i1r10_i-1r10');
 	}
