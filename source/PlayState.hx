@@ -50,17 +50,7 @@ class PlayState extends FlxState
 		// generateBasicWorld();
 
 		World.parseWorldString(World.BASIC_WORLD_STRING);
-
-		FlxG.mouse.visible = false;
-
-		if (tracks.length < 1)
-			return;
-
-		for (i => track in tracks)
-			tracks[i] = track.trim();
 	}
-
-	final tracks:Array<String> = Assets.getText('assets/tracks.txt').split('\n');
 
 	public static function reloadPlayer()
 	{
@@ -91,18 +81,6 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
-
-		if (!FlxG.sound.music?.playing)
-		{
-			if (!FlxG.random.bool(FlxG.random.float(0, 15)))
-				return;
-
-			final track = tracks[FlxG.random.int(0, tracks.length - 1)];
-
-			trace('Playing track: $track');
-			FlxG.sound.playMusic('assets/tracks/$track.wav', 1.0, false);
-			// FlxG.sound.music.fadeIn(1, 0, 1, function(t) {});
-		}
 
 		if (FlxG.keys.anyJustPressed([A, S, W, D, LEFT, DOWN, UP, RIGHT]))
 		{
