@@ -5,6 +5,7 @@
 		{ "name": "Planks", "frame": 2 },
 		{ "name": "Dirt Block", "frame": 3 },
 		{ "name": "Tree Leaves", "frame": 4 },
-		{ "name": "Tree Trunk", "frame": 5 }
+		{ "name": "Tree Trunk", "frame": 5 },
+		{ "name": "Sand", "frame": 7 }
 	]
 }
