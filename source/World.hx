@@ -6,7 +6,8 @@ class World
 {
 	public static var FORMAT_NUMBER:Int = 4;
 
-	public static var BASIC_WORLD_STRING:String = 'f4_r39v0i0x0y11_r439v0i1x0y22_';
+	public static var BASIC_WORLD_STRING:String = 'f4_r40v0i0x0y11_r440v0i1x0y12_';
+	// public static var BASIC_WORLD_STRING:String = 'f4_r40v0i0x0y11_r81v0i1x0y12_';
 
 	static var blockData:Array<Dynamic> = [];
 	static var variation:Int = 0;
@@ -24,6 +25,8 @@ class World
 
 		for (piece in world.split('_'))
 		{
+			if (piece.trim().length == 0) continue;
+
 			trace(piece);
 
 			if (piece.startsWith('f') && format < 1)
@@ -72,16 +75,16 @@ class World
 		if (blockID < 0)
 			return;
 
-		if (blockX > game.width)
+		if (blockX >= game.width)
 		{
 			var ogX = blockX;
 
 			blockY += Math.floor(blockX / game.width);
 			blockX = blockX % game.width;
-			
-			trace('x overload ($ogX > ${game.width})');
-			trace(' * nx: $blockX ($ogX % ${game.width})');
-			trace(' * ny: $blockY (+ ${Math.floor(ogX / game.width)})');
+
+			// trace('x overload ($ogX > ${game.width})');
+			// trace(' * nx: $blockX ($ogX % ${game.width})');
+			// trace(' * ny: $blockY (+ ${Math.floor(ogX / game.width)})');
 		}
 
 		if (blockY > game.height)
@@ -110,7 +113,7 @@ class World
 
 		var v = '';
 		var r = '';
-		var rval = 0;
+		var rval = 1;
 		var id = '';
 		var x = '';
 		var y = '';
@@ -123,9 +126,11 @@ class World
 
 			v = 'v${block.variation}';
 			id = 'i${block.blockID.toInt()}';
-			if (x == '' || rval == 0)
+			if (x == '' || rval == 1)
+			{
 				x = 'x${Math.floor(block.x / Block.BLOCK_DIMENSION)}';
-			y = 'y${Math.floor(block.y / Block.BLOCK_DIMENSION)}';
+				y = 'y${Math.floor(block.y / Block.BLOCK_DIMENSION)}';
+			}
 
 			if (blockMembers[i + 1]?.blockID?.toInt() == block.blockID.toInt())
 			{
@@ -142,7 +147,7 @@ class World
 			{
 				world += '${r}${v}${id}${x}${y}_';
 				r = '';
-				rval = 0;
+				rval = 1;
 			}
 		}
 
