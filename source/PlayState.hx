@@ -65,7 +65,7 @@ class PlayState extends FlxState
 			var x = (Math.floor(instance.height / 2) - 1) * Block.BLOCK_DIMENSION;
 			var y = (Math.floor(instance.width / 2) - 1) * Block.BLOCK_DIMENSION;
 
-			PLAYER.setPosition(x, y);
+			prevPos.set(x, y);
 		}
 
 		PLAYER = BlockManager.getNewBlock(InventoryScreen.CURRENT_ITEM, prevPos.x, prevPos.y, true);
