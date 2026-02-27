@@ -6,6 +6,8 @@ class Block extends FlxSprite
 {
 	public var debugMode:Bool = false;
 
+	public var variation:Int = 0;
+
 	public static var SCALE:Float = 2;
 	public static var BLOCK_SIZE:Int = 16;
 
@@ -14,7 +16,7 @@ class Block extends FlxSprite
 	function set_blockID(newID:BlockID):BlockID
 	{
 		loadGraphic('assets/blocks.png', true, BLOCK_SIZE, BLOCK_SIZE);
-		animation.add('block', [BlockManager.blocksJSON?.blocks[newID.toInt()]?.frame ?? 0], 24);
+		animation.add('block', [(BlockManager.blocksJSON?.blocks[newID.toInt()]?.frame ?? 0) + variation], 24);
 		animation.play('block');
 
 		return blockID = newID;
@@ -25,10 +27,12 @@ class Block extends FlxSprite
 	static function get_BLOCK_DIMENSION():Int
 		return Math.round(BLOCK_SIZE * SCALE);
 
-	override public function new(blockID:BlockID, ?x:Float, ?y:Float, ?debugMode:Bool)
+	override public function new(blockID:BlockID, ?x:Float, ?y:Float, ?debugMode:Bool, ?variation:Null<Int> = null)
 	{
 		super(x, y);
 
+		if (variation != null)
+			this.variation = variation;
 		this.debugMode = debugMode;
 		this.blockID = blockID;
 

@@ -123,6 +123,9 @@ class PlayState extends FlxState
 
 		if (FlxG.keys.justPressed.E)
 			openSubState(new InventoryScreen());
+
+		if (FlxG.keys.justPressed.C)
+			World.generateWorldString();
 	}
 
 	public function generateBasicWorld()
