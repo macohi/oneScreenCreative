@@ -1,0 +1,16 @@
+{
+	"start": { "x": 0, "y": 0 },
+
+	"blocks": [
+		{
+			"blockID": 1,
+			"repeat": 10
+		},
+		{
+			"blockID": -1,
+			"repeat": 10
+		}
+	]
+
+	// sx0_sy0_i1r10_i-1r10
+}
