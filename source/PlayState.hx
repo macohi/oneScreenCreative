@@ -48,6 +48,8 @@ class PlayState extends FlxState
 		// generateBasicWorld();
 
 		World.parseWorldString(World.BASIC_WORLD_STRING);
+
+		FlxG.mouse.visible = false;
 	}
 
 	public static function reloadPlayer()
