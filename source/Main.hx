@@ -32,7 +32,7 @@ class Main extends Sprite
 			if (!FlxG.random.bool(FlxG.random.float(0, 15)))
 				return;
 
-			FlxG.sound.playMusic('assets/${tracks[FlxG.random.int(0, tracks.length - 1)]}', 1.0, false);
+			FlxG.sound.playMusic('assets/tracks/${tracks[FlxG.random.int(0, tracks.length - 1)]}.wav', 1.0, false);
 			FlxG.sound.music.fadeIn(1, 0, 1, function(t) {});
 		});
 	}
