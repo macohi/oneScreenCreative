@@ -8,6 +8,9 @@ class World
 	{
 		var game:PlayState = PlayState.instance;
 
+		var x:Int = 0;
+		var y:Int = 0;
+
 		trace('Parsing world: $world');
 
 		for (piece in world.split('_'))
@@ -18,7 +21,7 @@ class World
 			{
 				var symbol = piece.substr(1, 1);
 				var int = Std.parseInt(piece.substr(2));
-				
+
 				trace('STARTING $symbol : $int');
 			}
 		}
